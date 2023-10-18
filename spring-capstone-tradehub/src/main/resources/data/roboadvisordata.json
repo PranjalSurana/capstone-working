@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Apple Inc.",
+    "price": 150,
+    "quantity": 500,
+    "priceDiff": 12,
+    "quantDiff": 4,
+    "option": "buy",
+    "risk": 0.15,
+    "returnRate": 0.12
+  },
+  {
+    "name": "Microsoft Corporation",
+    "price": 130,
+    "quantity": 600,
+    "priceDiff": 9,
+    "quantDiff": 6,
+    "option": "sell",
+    "risk": 0.12,
+    "returnRate": 0.14
+  },
+  {
+    "name": "Amazon.com Inc.",
+    "price": 175,
+    "quantity": 400,
+    "priceDiff": 15,
+    "quantDiff": 2,
+    "option": "buy",
+    "risk": 0.18,
+    "returnRate": 0.15
+  },
+  {
+    "name": "Alphabet Inc.",
+    "price": 140,
+    "quantity": 800,
+    "priceDiff": 7,
+    "quantDiff": 1,
+    "option": "sell",
+    "risk": 0.14,
+    "returnRate": 0.18
+  },
+  {
+    "name": "Facebook, Inc.",
+    "price": 160,
+    "quantity": 700,
+    "priceDiff": 10,
+    "quantDiff": 5,
+    "option": "buy",
+    "risk": 0.16,
+    "returnRate": 0.14
+  },
+  {
+    "name": "Tesla, Inc.",
+    "price": 120,
+    "quantity": 900,
+    "priceDiff": 8,
+    "quantDiff": 3,
+    "option": "sell",
+    "risk": 0.10,
+    "returnRate": 0.28
+  },
+  {
+    "name": "NVIDIA Corporation",
+    "price": 190,
+    "quantity": 300,
+    "priceDiff": 20,
+    "quantDiff": 10,
+    "option": "buy",
+    "risk": 0.25,
+    "returnRate": 0.22
+  },
+  {
+    "name": "Johnson & Johnson",
+    "price": 145,
+    "quantity": 550,
+    "priceDiff": 13,
+    "quantDiff": 7,
+    "option": "sell",
+    "risk": 0.1,
+    "returnRate": 0.12
+  },
+  {
+    "name": "Coca-Cola Company",
+    "price": 135,
+    "quantity": 650,
+    "priceDiff": 6,
+    "quantDiff": 4,
+    "option": "buy",
+    "risk": 0.08,
+    "returnRate": 0.1
+  },
+  {
+    "name": "Procter & Gamble Co.",
+    "price": 155,
+    "quantity": 450,
+    "priceDiff": 18,
+    "quantDiff": 8,
+    "option": "sell",
+    "risk": 0.09,
+    "returnRate": 0.11
+  },
+  {
+    "name": "Intel Corporation",
+    "price": 125,
+    "quantity": 750,
+    "priceDiff": 9,
+    "quantDiff": 2,
+    "option": "buy",
+    "risk": 0.12,
+    "returnRate": 0.15
+  },
+  {
+    "name": "The Walt Disney Company",
+    "price": 165,
+    "quantity": 350,
+    "priceDiff": 11,
+    "quantDiff": 6,
+    "option": "sell",
+    "risk": 0.11,
+    "returnRate": 0.13
+  },
+  {
+    "name": "Visa Inc.",
+    "price": 180,
+    "quantity": 550,
+    "priceDiff": 16,
+    "quantDiff": 3,
+    "option": "buy",
+    "risk": 0.17,
+    "returnRate": 0.16
+  },
+  {
+    "name": "Verizon Communications Inc.",
+    "price": 140,
+    "quantity": 700,
+    "priceDiff": 12,
+    "quantDiff": 5,
+    "option": "sell",
+    "risk": 0.12,
+    "returnRate": 0.14
+  },
+  {
+    "name": "Mastercard Incorporated",
+    "price": 200,
+    "quantity": 250,
+    "priceDiff": 14,
+    "quantDiff": 4,
+    "option": "buy",
+    "risk": 0.2,
+    "returnRate": 0.19
+  },
+  {
+    "name": "Johnson & Johnson",
+    "price": 145,
+    "quantity": 550,
+    "priceDiff": 13,
+    "quantDiff": 7,
+    "option": "sell",
+    "risk": 0.1,
+    "returnRate": 0.12
+  },
+  {
+    "name": "Pfizer Inc.",
+    "price": 130,
+    "quantity": 600,
+    "priceDiff": 10,
+    "quantDiff": 6,
+    "option": "buy",
+    "risk": 0.11,
+    "returnRate": 0.13
+  },
+  {
+    "name": "Abbott Laboratories",
+    "price": 175,
+    "quantity": 400,
+    "priceDiff": 15,
+    "quantDiff": 2,
+    "option": "sell",
+    "risk": 0.14,
+    "returnRate": 0.16
+  },
+  {
+    "name": "IBM (International Business Machines) Corporation",
+    "price": 140,
+    "quantity": 800,
+    "priceDiff": 7,
+    "quantDiff": 1,
+    "option": "buy",
+    "risk": 0.15,
+    "returnRate": 0.17
+  },
+  {
+    "name": "The Home Depot, Inc.",
+    "price": 160,
+    "quantity": 700,
+    "priceDiff": 10,
+    "quantDiff": 5,
+    "option": "sell",
+    "risk": 0.13,
+    "returnRate": 0.15
+  },
+  {
+    "name": "Salesforce.com, Inc.",
+    "price": 120,
+    "quantity": 900,
+    "priceDiff": 8,
+    "quantDiff": 3,
+    "option": "buy",
+    "risk": 0.16,
+    "returnRate": 0.14
+  },
+  {
+    "name": "General Electric Company",
+    "price": 190,
+    "quantity": 300,
+    "priceDiff": 20,
+    "quantDiff": 10,
+    "option": "sell",
+    "risk": 0.23,
+    "returnRate": 0.19
+  },
+  {
+    "name": "AT&T Inc.",
+    "price": 145,
+    "quantity": 550,
+    "priceDiff": 13,
+    "quantDiff": 7,
+    "option": "buy",
+    "risk": 0.11,
+    "returnRate": 0.14
+  },
+  {
+    "name": "Walt Disney Company",
+    "price": 155,
+    "quantity": 450,
+    "priceDiff": 18,
+    "quantDiff": 8,
+    "option": "sell",
+    "risk": 0.1,
+    "returnRate": 0.13
+  },
+  {
+    "name": "Oracle Corporation",
+    "price": 140,
+    "quantity": 800,
+    "priceDiff": 7,
+    "quantDiff": 1,
+    "option": "buy",
+    "risk": 0.14,
+    "returnRate": 0.17
+  },
+  {
+    "name": "Netflix, Inc.",
+    "price": 160,
+    "quantity": 700,
+    "priceDiff": 10,
+    "quantDiff": 5,
+    "option": "sell",
+    "risk": 0.18,
+    "returnRate": 0.16
+  },
+  {
+    "name": "Adobe Inc.",
+    "price": 120,
+    "quantity": 900,
+    "priceDiff": 8,
+    "quantDiff": 3,
+    "option": "buy",
+    "risk": 0.16,
+    "returnRate": 0.14
+  }
+]

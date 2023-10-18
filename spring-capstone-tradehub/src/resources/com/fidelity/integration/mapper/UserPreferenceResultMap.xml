@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fidelity.integration.mapper.UserPreferenceResultMap">
+
+    <resultMap type="UserPreference" id="UserPreferenceResultMap">
+        <id property="id" column="userpreferenceid" /> <!-- UserPreferenceId is the userid -->
+        <result property="investmentPurpose" column="investmentPurpose" />
+        <result property="riskTolerance" column="riskTolerance" />
+        <result property="incomeCategory" column="incomeCategory" />
+        <result property="lengthOfInvestment" column="lengthOfInvestment" />
+        <result property="acceptedRoboAdvisor" column="acceptedRoboAdvisor" />
+        <result property="isEmpty" column="isEmpty" />
+    </resultMap>
+
+    <select id="getAllUserPreferences" resultMap="UserPreferenceResultMap">
+        SELECT USERPREFERENCEID, investmentPurpose, riskTolerance, incomeCategory,
+        lengthOfInvestment, acceptedRoboAdvisor, isEmpty
+        FROM userpreference
+    </select>
+
+    <!-- SELECT statement for UserPreference by ID -->
+    <select id="getUserPreferenceById" resultMap="UserPreferenceResultMap">
+        SELECT USERPREFERENCEID, investmentPurpose, riskTolerance, incomeCategory,
+        lengthOfInvestment, acceptedRoboAdvisor, isEmpty
+        FROM userpreference
+        WHERE USERPREFERENCEID = #{id}
+    </select>
+
+
+    <!-- INSERT statement for UserPreference -->
+    <insert id="insertUserPreference" parameterType="UserPreference">
+        INSERT INTO userpreference (
+        USERPREFERENCEID, investmentPurpose, riskTolerance, incomeCategory,
+        lengthOfInvestment , acceptedRoboAdvisor,isEmpty
+        )
+        VALUES (
+#{id}, #{investmentPurpose}, #{riskTolerance}, #{incomeCategory},
+#{lengthOfInvestment}, #{acceptedRoboAdvisor}, 1
+<!--        , #{isEmpty}-->
+        )
+
+    </insert>
+
+    <!-- UPDATE statement for UserPreference -->
+    <update id="updateUserPreference" parameterType="UserPreference">
+        UPDATE userpreference
+        SET
+        investmentPurpose = #{investmentPurpose},
+        riskTolerance = #{riskTolerance},
+        incomeCategory = #{incomeCategory},
+        lengthOfInvestment = #{lengthOfInvestment},
+        acceptedRoboAdvisor = #{acceptedRoboAdvisor}
+        WHERE
+        USERPREFERENCEID = #{id}
+    </update>
+
+    <!-- DELETE statement for UserPreference -->
+    <delete id="deleteUserPreference" parameterType="Long">
+        DELETE FROM userpreference
+        WHERE
+        USERPREFERENCEID = #{id}
+    </delete>
+
+
+</mapper>

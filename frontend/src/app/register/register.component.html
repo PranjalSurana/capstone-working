@@ -1,0 +1,110 @@
+<nav
+  class="flex items-center justify-between px-3 py-3 border rounded-sm shadow-sm bg-gradient text-white"
+>
+  <a href="/dashboard" class="text-2xl font-extrabold italic whitespace-nowrap">
+    TradeHub
+  </a>
+  <ul class="flex gap-2 justify-end w-full">
+    <li><a routerLink="/dashboard">Dashboard</a></li>
+    <li><a routerLink="/portfolio">Portfolio</a></li>
+    <li><a routerLink="/robo-advisor">Robo Advisor</a></li>
+    <li><a routerLink="/tradehistory">Trade History</a></li>
+    <li><a routerLink="/">Logout</a></li>
+  </ul>
+</nav>
+<section class="flex items-center justify-evenly mx-auto w-3/5 my-[50px]">
+  <form
+    class="flex flex-1 flex-col gap-4"
+    [formGroup]="registrationForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="form-group">
+      <label for="email">Email*</label>
+      <input class="input" type="email" id="email" formControlName="email" />
+      <div
+        *ngIf="
+          registrationForm.get('email')?.invalid &&
+          registrationForm.get('email')?.touched
+        "
+      >
+        <div *ngIf="registrationForm.get('email')?.hasError('required')">
+          Email is required.
+        </div>
+        <div *ngIf="registrationForm.get('email')?.hasError('email')">
+          Invalid email format.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="personalName">Personal Name</label>
+      <input
+        class="input"
+        type="text"
+        id="personalName"
+        formControlName="personalName"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="dob">Date of Birth</label>
+      <input class="input" type="date" id="dob" formControlName="dob" />
+    </div>
+
+    <div class="form-group">
+      <label for="country">Country*</label>
+      <input class="input" type="text" id="country" formControlName="country" />
+      <div
+        *ngIf="
+          registrationForm.get('country')?.invalid &&
+          registrationForm.get('country')?.touched
+        "
+      >
+        <div *ngIf="registrationForm.get('country')?.hasError('required')">
+          Country is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="riskAppetite">Investment Risk Appetite*</label>
+      <select class="input" id="riskAppetite" formControlName="riskAppetite">
+        <option value="conservative">Conservative</option>
+        <option value="moderate">Moderate</option>
+        <option value="aggressive">Aggressive</option>
+      </select>
+    </div>
+
+    <!-- <div class="form-group">
+      <label for="balance">Balance*</label>
+      <input
+        class="input"
+        type="number"
+        id="balance"
+        formControlName="balance"
+      />
+      <div
+        *ngIf="
+          registrationForm.get('balance')?.invalid &&
+          registrationForm.get('balance')?.touched
+        "
+      >
+        <div *ngIf="registrationForm.get('balance')?.hasError('required')">
+          Balance is required.
+        </div>
+      </div>
+    </div> -->
+
+    <div class="flex items-center gap-3">
+      <button class="btn-primary w-fit" type="submit">Register</button>
+      <a class="link" href="/login">Already an user?</a>
+    </div>
+  </form>
+  <img
+    class="flex-1"
+    src="/assets/images/login-image.png"
+    height="500px"
+    width="500px"
+    alt="trading lapton image"
+  />
+</section>

@@ -1,0 +1,90 @@
+<nav
+  class="flex items-center justify-between px-3 py-3 border rounded-sm shadow-sm bg-gradient text-white"
+>
+  <a href="/dashboard" class="text-2xl font-extrabold italic whitespace-nowrap">
+    TradeHub
+  </a>
+  <ul class="flex gap-2 justify-end w-full">
+    <li><a routerLink="/dashboard">Dashboard</a></li>
+    <li><a routerLink="/portfolio">Portfolio</a></li>
+    <li><a routerLink="/robo-advisor">RoboAdvisor</a></li>
+    <li><a routerLink="/tradehistory">Trade History</a></li>
+    <li><a routerLink="/client-preferences">Client Preferences</a></li>
+    <li><button (click)="clearLocalStorage()">Logout</button></li>
+  </ul>
+</nav>
+
+<div class="container mx-auto py-2 sm:px-6 lg:px-8">
+  <h1 class="text-2xl font-bold mb-4">Suggestions for your portfolio</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <!--    &lt;!&ndash; Buy trade cards &ndash;&gt;-->
+    <!--    <div-->
+    <!--      class="buy-trade-card bg-white p-4 rounded-lg flex flex-col justify-between"-->
+    <!--      *ngFor="let trade of mockTradesBuy"-->
+    <!--    >-->
+    <!--      <div>-->
+    <!--        <h2 class="text-lg font-semibold mb-2">{{ trade.name }}</h2>-->
+    <!--        <p class="text-gray-600 mb-1">Price: ${{ trade.price }}</p>-->
+    <!--        <p class="text-gray-600 mb-1">Quantity: {{ trade.quantity }}</p>-->
+    <!--        &lt;!&ndash; Other trade details &ndash;&gt;-->
+    <!--        <p class="text-sm">-->
+    <!--          Stock went-->
+    <!--          <span class="stock-change text-green-500">up</span>-->
+    <!--          by ${{ trade.priceDiff }} and {{ trade.quantDiff }}% in quantity.-->
+    <!--        </p>-->
+    <!--      </div>-->
+    <!--      <button class="bg-blue-500 text-white px-3 py-1 rounded-lg self-end">-->
+    <!--        Buy-->
+    <!--      </button>-->
+    <!--    </div>-->
+
+    <!--    &lt;!&ndash; Sell trade cards &ndash;&gt;-->
+    <!--    <div-->
+    <!--      class="sell-trade-card bg-white p-4 rounded-lg flex flex-col justify-between"-->
+    <!--      *ngFor="let trade of mockTradesSell"-->
+    <!--    >-->
+    <!--      <div>-->
+    <!--        <h2 class="text-lg font-semibold mb-2">{{ trade.name }}</h2>-->
+    <!--        <p class="text-gray-600 mb-1">Price: ${{ trade.price }}</p>-->
+    <!--        <p class="text-gray-600 mb-1">Quantity: {{ trade.quantity }}</p>-->
+    <!--        &lt;!&ndash; Other trade details &ndash;&gt;-->
+    <!--        <p class="text-sm">-->
+    <!--          Stock went-->
+    <!--          <span class="stock-change text-red-500">down</span>-->
+    <!--          by ${{ trade.priceDiff }} and {{ trade.quantDiff }}% in quantity.-->
+    <!--        </p>-->
+    <!--      </div>-->
+    <!--      <button class="bg-red-500 text-white px-3 py-1 rounded-lg self-end">-->
+    <!--        Sell-->
+    <!--      </button>-->
+    <!--    </div>-->
+    <!-- Unified Trade cards -->
+    <div
+      class="trade-card bg-white p-4 rounded-lg flex flex-col justify-between"
+      *ngFor="let trade of mockTrades"
+    >
+      <div>
+        <h2 class="text-lg font-semibold mb-2">{{ trade.name }}</h2>
+        <p class="text-gray-600 mb-1">Price: ${{ trade.price }}</p>
+        <p class="text-gray-600 mb-1">Quantity: {{ trade.quantity }}</p>
+        <!-- Other trade details -->
+        <p class="text-sm">
+          Stock went
+          <ng-container *ngIf="trade.option == 'buy'; else sellText">
+            <span class="stock-change text-red-500">up</span>
+          </ng-container>
+          <ng-template #sellText>
+            <span class="stock-change text-blue-500">down</span>
+          </ng-template>
+          by ${{ trade.priceDiff }} and {{ trade.quantDiff }}% in quantity.
+        </p>
+      </div>
+      <button
+        [ngClass]="{'bg-red-500 text-white': trade.option == 'buy', 'bg-blue-500 text-white': trade.option == 'sell'}"
+        [innerText]="trade.option == 'buy' ? 'Sell' : 'Buy'"
+        class="px-3 py-1 rounded-lg self-end"
+      ></button>
+    </div>
+  </div>
+</div>

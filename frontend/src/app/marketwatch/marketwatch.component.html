@@ -1,0 +1,80 @@
+<nav
+  class="flex items-center justify-between px-3 py-3 border rounded-sm shadow-sm bg-gradient text-white"
+>
+  <a href="/dashboard" class="text-2xl font-extrabold italic whitespace-nowrap">
+    TradeHub
+  </a>
+  <ul class="flex gap-2 justify-end w-full">
+    <li><a routerLink="/dashboard">Dashboard</a></li>
+    <li><a routerLink="/portfolio">Portfolio</a></li>
+    <li><a routerLink="/robo-advisor">Notifications</a></li>
+    <li><a routerLink="/tradehistory">Trade History</a></li>
+    <li><a routerLink="/">Logout</a></li>
+  </ul>
+</nav>
+<div class="flex flex-col">
+  <div class="overflow-x-auto">
+    <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <h1 class="text-3xl font-bold p-4">Market Watch</h1>
+        <table class="min-w-full text-left text-sm font-light">
+          <thead class="border-b font-medium dark:border-neutral-500">
+            <tr>
+              <th scope="col" class="px-6 py-4">AskPrice</th>
+              <th scope="col" class="px-6 py-4">BidPrice</th>
+              <th scope="col" class="px-6 py-4">InstrumentId</th>
+              <th scope="col" class="px-6 py-4">ExternalIdType</th>
+              <th scope="col" class="px-6 py-4">External ID</th>
+              <th scope="col" class="px-6 py-4">Category ID</th>
+              <th scope="col" class="px-6 py-4">Max Quantity</th>
+              <th scope="col" class="px-6 py-4">Min Quantity</th>
+              <th scope="col" class="px-6 py-4">Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let stock of stockDetails">
+            <tr
+              class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
+            >
+              <td class="whitespace-nowrap px-6 py-4 font-medium">
+                {{ stock.askPrice }}
+              </td>
+              <td class="whitespace-nowrap px-6 py-4">{{ stock.bidPrice }}</td>
+              <td class="whitespace-nowrap px-6 py-4">
+                {{ stock.instrument.instrumentId }}
+              </td>
+              <td class="whitespace-nowrap px-6 py-4">
+                {{ stock.instrument.externalIdType }}
+              </td>
+              <td class="whitespace-nowrap px-6 py-4">
+                {{ stock.instrument.externalId }}
+              </td>
+              <td class="whitespace-nowrap px-6 py-4">
+                {{ stock.instrument.categoryId }}
+              </td>
+              <td class="whitespace-nowrap px-6 py-4">
+                {{ stock.instrument.maxQuantity }}
+              </td>
+              <td class="whitespace-nowrap px-6 py-4">
+                {{ stock.instrument.minQuantity }}
+              </td>
+              <td class="whitespace-nowrap px-6 py-4">
+                <button
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  (click)="
+                    onBuyOrSell(
+                      stock.instrument.instrumentId,
+                      stock.askPrice,
+                      true
+                    )
+                  "
+                >
+                  Buy
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

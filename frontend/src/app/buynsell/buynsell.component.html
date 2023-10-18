@@ -1,0 +1,159 @@
+<nav
+  class="flex items-center justify-between px-3 py-3 border rounded-sm shadow-sm bg-gradient text-white"
+>
+  <a href="/dashboard" class="text-2xl font-extrabold italic whitespace-nowrap">
+    TradeHub
+  </a>
+  <ul class="flex gap-2 justify-end w-full">
+    <li><a routerLink="/dashboard">Dashboard</a></li>
+    <li><a routerLink="/portfolio">Portfolio</a></li>
+    <li><a routerLink="/robo-advisor">Robo Advisor</a></li>
+    <li><a routerLink="/tradehistory">Trade History</a></li>
+    <li><a routerLink="/">Logout</a></li>
+  </ul>
+</nav>
+<section class="w-full">
+  <div class="flex flex-col mx-auto mt-[100px] w-[500px] border shadow-md pb-2">
+    <div class="flex justify-between items-center">
+      <div class="flex">
+        <button
+          (click)="setIsBuy(true)"
+          class="px-3 py-2 text-white"
+          [ngClass]="{
+            'bg-primary':isBuy,
+            'text-black':!isBuy,
+          }"
+        >
+          BUY
+        </button>
+        <button
+          [ngClass]="{
+          'bg-red-600':!isBuy,
+          'text-black':isBuy,
+        }"
+          class="px-3 py-2 text-white"
+          (click)="setIsBuy(false)"
+        >
+          SELL
+        </button>
+      </div>
+    </div>
+    <div *ngIf="isBuy">
+      <div class="flex flex-col px-3 gap-4">
+        <div class="flex flex-col px-3 py-5">
+          <p class="text-4xl font-bold">
+            {{ myStockPrice | currency }}
+          </p>
+          <p class="text-xl">{{ instrument.instrumentDescription }}</p>
+        </div>
+        <div class="flex justify-between px-3">
+          <div class="form-group">
+            <label for="quantity">Current Balance</label>
+            <input
+              disabled
+              type="number"
+              class="input bg-gray-200"
+              [value]="myBalance - myStockPrice * myStocks"
+              placeholder="Enter quantity"
+            />
+          </div>
+          <div class="form-group">
+            <label for="quantity">Total Price</label>
+            <input
+              disabled
+              type="number"
+              class="input bg-gray-200"
+              [value]="myStockPrice * myStocks"
+              placeholder="Enter quantity"
+            />
+          </div>
+        </div>
+        <div class="flex justify-between px-3">
+          <div class="form-group">
+            <label for="quantity">Bid Price</label>
+            <input
+              type="number"
+              [(ngModel)]="myStockPrice"
+              class="input"
+              placeholder="Enter quantity"
+            />
+          </div>
+          <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input
+              type="number"
+              [(ngModel)]="myStocks"
+              class="input"
+              placeholder="Enter quantity"
+            />
+          </div>
+        </div>
+        <button
+          (click)="placeBuyOrder(myStockPrice, myStocks)"
+          class="btn-primary w-fit ml-auto mr-3 my-3"
+        >
+          Place Order
+        </button>
+      </div>
+    </div>
+    <div *ngIf="!isBuy">
+      <div class="flex flex-col px-3 gap-4">
+        <div class="flex flex-col px-3 py-5">
+          <p class="text-4xl font-bold">
+            {{ "2.45" | currency }}
+          </p>
+          <p class="text-xl">{{ instrument.instrumentDescription }}</p>
+        </div>
+        <div class="flex justify-between px-3">
+          <div class="form-group">
+            <label for="quantity">Current Balance</label>
+            <input
+              disabled
+              type="number"
+              class="input bg-gray-200"
+              [value]="myBalance + myStockPrice * myStocks"
+              placeholder="Enter quantity"
+            />
+          </div>
+          <div class="form-group">
+            <label for="quantity">Total Price</label>
+            <input
+              disabled
+              type="number"
+              class="input bg-gray-200"
+              [value]="myStockPrice * myStocks"
+              placeholder="Enter quantity"
+            />
+          </div>
+        </div>
+        <div class="flex justify-between px-3">
+          <div class="form-group">
+            <label for="quantity">Sell Price</label>
+            <input
+              type="number"
+              [(ngModel)]="myStockPrice"
+              class="input"
+              placeholder="Enter quantity"
+            />
+          </div>
+          <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input
+              type="number"
+              [max]="myStocks"
+              [(ngModel)]="myStocks"
+              class="input"
+              placeholder="Enter quantity"
+            />
+          </div>
+        </div>
+        <button
+          (click)="placeSellOrder(instrument, myStockPrice, myStocks)"
+          class="btn-primary w-fit ml-auto mr-3 my-3"
+        >
+          Place Order
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

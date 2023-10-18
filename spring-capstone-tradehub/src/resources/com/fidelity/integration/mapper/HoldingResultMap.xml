@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fidelity.integration.mapper.HoldingResultMap">
+
+    <resultMap type="Instrument" id="InstrumentResultMap">
+        <id property="instrumentId" column="INSTRUMENTID" />
+        <result property="externalIdType" column="EXTERNALIDTYPE" />
+        <result property="externalId" column="EXTERNALID" />
+        <result property="categoryId" column="CATEGORYID" />
+        <result property="instrumentDescription" column="INSTRUMENTDESCRIPTION" />
+        <result property="maxQuantity" column="MAXQUANTITY" />
+        <result property="minQuantity" column="MINQUANTITY" />
+    </resultMap>
+
+    <resultMap type="Holding" id="HoldingResultMap">
+        <id property="holdingId" column="HOLDINGID" />
+        <result property="quantity" column="QUANTITY" />
+        <result property="buySellPrice" column="BUYPRICE" />
+        <result property="userId" column="USERID" />
+        <association property="instrument" resultMap="InstrumentResultMap" />
+    </resultMap>
+
+    <select id="getAllHoldings" resultMap="HoldingResultMap">
+        SELECT h.HOLDINGID, h.QUANTITY, h.BUYPRICE, h.USERID, i.INSTRUMENTID, i.EXTERNALIDTYPE, i.EXTERNALID, i.CATEGORYID, i.INSTRUMENTDESCRIPTION, i.MAXQUANTITY, i.MINQUANTITY
+        FROM holding h
+        LEFT JOIN instrument i ON h.INSTRUMENTID = i.INSTRUMENTID
+    </select>
+
+    <select id="getHoldingById" resultMap="HoldingResultMap">
+        SELECT h.HOLDINGID, h.QUANTITY, h.BUYPRICE, h.USERID, i.INSTRUMENTID, i.EXTERNALIDTYPE, i.EXTERNALID, i.CATEGORYID, i.INSTRUMENTDESCRIPTION, i.MAXQUANTITY, i.MINQUANTITY
+        FROM holding h
+        LEFT JOIN instrument i ON h.INSTRUMENTID = i.INSTRUMENTID
+        WHERE h.HOLDINGID = #{holdingId}
+    </select>
+
+    <select id="getHoldingByInstrumentAndUserId" resultMap="HoldingResultMap" parameterType="java.util.Map">
+        SELECT h.HOLDINGID, h.QUANTITY, h.BUYPRICE, h.USERID, i.INSTRUMENTID, i.EXTERNALIDTYPE, i.EXTERNALID, i.CATEGORYID, i.INSTRUMENTDESCRIPTION, i.MAXQUANTITY, i.MINQUANTITY
+        FROM holding h
+        LEFT JOIN instrument i ON h.INSTRUMENTID = i.INSTRUMENTID
+        WHERE h.USERID = #{userId}
+        AND h.INSTRUMENTID = #{instrumentId}
+    </select>
+
+    <select id="getHoldingsByUserId" resultMap="HoldingResultMap">
+        SELECT h.HOLDINGID, h.QUANTITY, h.BUYPRICE, h.USERID, i.INSTRUMENTID, i.EXTERNALIDTYPE, i.EXTERNALID, i.CATEGORYID, i.INSTRUMENTDESCRIPTION, i.MAXQUANTITY, i.MINQUANTITY
+        FROM holding h
+        LEFT JOIN instrument i ON h.INSTRUMENTID = i.INSTRUMENTID
+        WHERE h.USERID = #{userId}
+    </select>
+
+    <insert id="insertHolding" parameterType="Holding" useGeneratedKeys="true" keyColumn="HOLDINGID" keyProperty="holdingId">
+        INSERT INTO holding (
+         QUANTITY, BUYPRICE, USERID, INSTRUMENTID
+        )
+        VALUES (
+        #{quantity}, #{buySellPrice}, #{userId}, #{instrument.instrumentId}
+        )
+    </insert>
+
+    <update id="updateHolding" parameterType="Holding">
+        UPDATE holding
+        SET
+        QUANTITY = #{quantity},
+        BUYPRICE = #{buySellPrice}
+        WHERE
+        HOLDINGID = #{holdingId}
+    </update>
+
+    <delete id="deleteHolding" parameterType="Long">
+        DELETE FROM holding
+        WHERE
+        HOLDINGID = #{holdingId}
+    </delete>
+
+</mapper>

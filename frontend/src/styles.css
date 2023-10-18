@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '~ngx-toastr/toastr';
+
+
+@layer base{
+    body{
+        min-height: 100vh;
+        font-family: 'Open Sans', sans-serif !important;
+        @apply bg-gray-100 !important;
+        display: flex;
+        flex-direction: column;
+    }
+    
+}
+
+@layer components{
+    .footer {
+        background-image: linear-gradient(to right, #368727, #004467);
+        color: white;
+        margin-top: 25px;
+        width: 100%;
+        margin-top: auto;
+    }
+    .input{
+        @apply px-3 py-1 rounded-sm border border-gray-300 focus:outline-none focus:ring-1 focus:ring-gray-300;
+    }
+    .btn-primary{
+        @apply px-3 py-1 bg-primary text-white rounded-md font-bold;
+    }
+    .form-group{
+        @apply flex flex-col gap-2;
+    }
+    .link{
+        @apply text-primary underline;
+    }
+    .selected{
+        @apply  text-white;
+    }
+    .bg-gradient{
+        background-image: linear-gradient(to right, #5c7e22, #004467);
+    }
+
+}

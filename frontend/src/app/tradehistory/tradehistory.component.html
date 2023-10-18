@@ -1,0 +1,54 @@
+<nav
+  class="flex items-center justify-between px-3 py-3 border rounded-sm shadow-sm bg-gradient text-white"
+>
+  <a href="/dashboard" class="text-2xl font-extrabold italic whitespace-nowrap">
+    TradeHub
+  </a>
+  <ul class="flex gap-2 justify-end w-full">
+    <li><a routerLink="/dashboard">Dashboard</a></li>
+    <li><a routerLink="/portfolio">Portfolio</a></li>
+    <li><a routerLink="/robo-advisor">Robo Advisor</a></li>
+    <li><a routerLink="/tradehistory">Trade History</a></li>
+    <li><a routerLink="/">Logout</a></li>
+  </ul>
+</nav>
+<div class="flex flex-col">
+  <button
+    (click)="openPDF()"
+    class="mr-3 ml-auto my-3 text-sm bg-green-700 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+  >
+    Generate Report
+  </button>
+  <div class="text-gray-900 bg-gray-200">
+    <div class="px-3 py-4 flex justify-center" id="htmlData">
+      <table class="w-full text-md bg-white shadow-md rounded mb-4">
+        <tbody>
+          <tr class="border-b">
+            <th class="text-left p-3 px-5">Buy or Sell</th>
+            <th class="text-left p-3 px-5">Name</th>
+            <th class="text-left p-3 px-5">Sector</th>
+            <th class="text-left p-3 px-5">Quantity</th>
+            <th class="text-left p-3 px-5">Last Price &#36;</th>
+            <!-- <th class="text-left p-3 px-5">Profit Loss &percnt;</th> -->
+            <!-- <th class="text-left p-3 px-5">Yield &percnt;</th> -->
+            <!-- <th class="text-left p-3 px-5">Market Value &#36;</th> -->
+            <!-- <th class="text-left p-3 px-5">Portfolio &percnt;</th> -->
+            <th></th>
+          </tr>
+          <tr
+            *ngFor="let item of transactions"
+            class="border-b hover:bg-lime-100 bg-gray-100"
+          >
+            <td class="p-3 px-5">{{ item.isBuy ? "Buy" : "Sell" }}</td>
+            <td class="p-3 px-5">
+              {{ item.instrument.instrumentDescription }}
+            </td>
+            <td class="p-3 px-5">{{ item.instrument.categoryId }}</td>
+            <td class="p-3 px-5">{{ item.quantity }}</td>
+            <td class="p-3 px-5">{{ item.buySellPrice }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

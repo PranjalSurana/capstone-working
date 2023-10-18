@@ -1,0 +1,31 @@
+/* ... Other styles ... */
+
+/* Styling for buy trade card */
+
+.buy-trade-card {
+    background-color: #eff6ff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styling for sell trade card */
+.sell-trade-card {
+    background-color: #ffebee;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styling for trade card title */
+.buy-trade-card h2, .sell-trade-card h2 {
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* ... Other styles ... */

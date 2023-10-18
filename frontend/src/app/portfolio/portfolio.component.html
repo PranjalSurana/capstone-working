@@ -1,0 +1,79 @@
+<nav
+  class="flex items-center justify-between px-3 py-3 border rounded-sm shadow-sm bg-gradient text-white"
+>
+  <a href="/dashboard" class="text-2xl font-extrabold italic whitespace-nowrap">
+    TradeHub
+  </a>
+  <ul class="flex gap-2 justify-end w-full">
+    <li><a routerLink="/dashboard">Dashboard</a></li>
+    <li><a routerLink="/portfolio">Portfolio</a></li>
+    <li><a routerLink="/robo-advisor">RoboAdvisor</a></li>
+    <li><a routerLink="/robo-advisor">Robo Advisor</a></li>
+    <li><a routerLink="/tradehistory">Trade History</a></li>
+    <li><a routerLink="/">Logout</a></li>
+  </ul>
+</nav>
+<div class="text-gray-900 py-2 sm:px-6 lg:px-8">
+  <h1 class="text-3xl font-bold p-4 pb-0">Portfolio</h1>
+  <div class="flex justify-center mt-5">
+    <table class="w-full text-md bg-white shadow-md rounded mb-4">
+      <tbody>
+        <tr class="border-b">
+          <th class="text-left p-3 px-5">Instrument ID</th>
+          <th class="text-left p-3 px-5">External ID Type</th>
+          <th class="text-left p-3 px-5">External ID</th>
+          <th class="text-left p-3 px-5">Category ID</th>
+          <th class="text-left p-3 px-5">instrumentDescription</th>
+          <th class="text-left p-3 px-5">Max Quantity</th>
+          <th class="text-left p-3 px-5">Min Quantity</th>
+          <th class="text-left p-3 px-5">Quantity</th>
+          <th class="text-left p-3 px-5">Buy Price</th>
+          <th></th>
+        </tr>
+        <tr
+          class="border-b hover:bg-lime-100 bg-gray-100"
+          *ngFor="let holding of holdings"
+        >
+          <td class="p-3 px-5">{{ holding.instrument.instrumentId }}</td>
+          <td class="p-3 px-5">{{ holding.instrument.externalIdType }}</td>
+          <td class="p-3 px-5">{{ holding.instrument.externalId }}</td>
+          <td class="p-3 px-5">{{ holding.instrument.categoryId }}</td>
+          <td class="p-3 px-5">
+            {{ holding.instrument.instrumentDescription }}
+          </td>
+          <td class="p-3 px-5">{{ holding.instrument.maxQuantity }}</td>
+          <td class="p-3 px-5">{{ holding.instrument.minQuantity }}</td>
+          <td class="p-3 px-5">{{ holding.quantity }}</td>
+          <td class="p-3 px-5">{{ holding.buySellPrice }}</td>
+          <td class="p-3 px-5 flex justify-end">
+            <button
+              (click)="
+                onBuyOrSell(
+                  holding.instrument.instrumentId,
+                  holding.buySellPrice,
+                  true
+                )
+              "
+              type="button"
+              class="mr-3 text-sm bg-green-600 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+            >
+              Buy</button
+            ><button
+              (click)="
+                onBuyOrSell(
+                  holding.instrument.instrumentId,
+                  holding.buySellPrice,
+                  false
+                )
+              "
+              type="button"
+              class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+            >
+              Sell
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

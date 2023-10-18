@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fidelity.integration.mapper.UserResultMap">
+
+    <resultMap type="User" id="UserResultMap">
+        <id property="id" column="id" />
+        <result property="email" column="email" />
+        <result property="personalName" column="personalname" />
+        <result property="country" column="country" />
+        <result property="dob" column="dob" />
+        <result property="riskAppetite" column="riskappetite" />
+        <result property="balance" column="balance" />
+        <association property="userPreference" resultMap="UserPreferenceResultMap" />
+    </resultMap>
+
+    <resultMap type="UserPreference" id="UserPreferenceResultMap">
+        <id property="id" column="USERPREFERENCEID" />
+        <result property="investmentPurpose" column="investmentpurpose" />
+        <result property="riskTolerance" column="risktolerance" />
+        <result property="incomeCategory" column="incomecategory" />
+        <result property="lengthOfInvestment" column="lengthofinvestment" />
+        <result property="acceptedRoboAdvisor" column="acceptedroboadvisor" />
+        <result property="isEmpty" column="isempty" />
+    </resultMap>
+
+    <select id="getAllUsers" resultMap="UserResultMap">
+        SELECT u.id, u.email, u.personalname, u.country, u.dob, u.riskappetite, u.balance,
+        up.USERPREFERENCEID, up.investmentpurpose, up.risktolerance, up.incomecategory,
+        up.lengthofinvestment, up.acceptedroboadvisor, up.isempty
+        FROM usertable u
+        LEFT JOIN userpreference up ON u.id = up.USERPREFERENCEID
+    </select>
+
+    <select id="getUserById" resultMap="UserResultMap">
+        SELECT u.id, u.email, u.personalname, u.country, u.dob, u.riskappetite, u.balance,
+        up.USERPREFERENCEID, up.investmentpurpose, up.risktolerance, up.incomecategory,
+        up.lengthofinvestment, up.acceptedroboadvisor, up.isempty
+        FROM usertable u
+        LEFT JOIN userpreference up ON u.id = up.USERPREFERENCEID
+        WHERE u.id = #{id}
+    </select>
+
+    <select id="getUserByEmail" resultMap="UserResultMap" parameterType="String">
+        SELECT u.id, u.email, u.personalname, u.country, u.dob, u.riskappetite, u.balance,
+        up.USERPREFERENCEID, up.investmentpurpose, up.risktolerance, up.incomecategory,
+        up.lengthofinvestment, up.acceptedroboadvisor, up.isempty
+        FROM usertable u
+        LEFT JOIN userpreference up ON u.id = up.USERPREFERENCEID
+        WHERE u.email = #{email}
+    </select>
+
+    <!-- INSERT statement for User -->
+    <insert id="insertUser" parameterType="User" >
+        INSERT INTO usertable (
+       id,email, personalname, country, dob, riskappetite, balance
+        )
+        VALUES (
+      #{id},#{email}, #{personalName}, #{country}, #{dob}, #{riskAppetite}, #{balance}
+        )
+
+    </insert>
+
+    <!-- UPDATE statement for User -->
+    <update id="updateUser" parameterType="User">
+        UPDATE usertable
+        SET
+        email = #{email},
+        personalname = #{personalName},
+        country = #{country},
+        dob = #{dob},
+        riskappetite = #{riskAppetite},
+        balance = #{balance}
+        WHERE
+        id = #{id}
+    </update>
+
+<!--    &lt;!&ndash; DELETE statement for User &ndash;&gt;-->
+<!--    <delete id="deleteUser" parameterType="Long">-->
+<!--        DELETE FROM usertable-->
+<!--        WHERE-->
+<!--        id = #{id}-->
+<!--    </delete>-->
+
+    <select id="verifyEmail" resultType="int" parameterType="String">
+
+        select count(email) from usertable
+        where email=#{email}
+    </select>
+
+
+</mapper>

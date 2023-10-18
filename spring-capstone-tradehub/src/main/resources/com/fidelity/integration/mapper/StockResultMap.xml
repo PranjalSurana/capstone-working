@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fidelity.integration.mapper.StockResultMap">
+    <resultMap type="Instrument" id="InstrumentResultMap">
+        <id property="instrumentId" column="INSTRUMENTID" />
+        <result property="externalIdType" column="EXTERNALIDTYPE" />
+        <result property="externalId" column="EXTERNALID" />
+        <result property="categoryId" column="CATEGORYID" />
+        <result property="instrumentDescription" column="INSTRUMENTDESCRIPTION" />
+        <result property="maxQuantity" column="MAXQUANTITY" />
+        <result property="minQuantity" column="MINQUANTITY" />
+    </resultMap>
+
+    <resultMap type="Stock" id="StockResultMap">
+        <id property="stockId" column="STOCKID" />
+        <result property="askPrice" column="ASKPRICE" />
+        <result property="bidPrice" column="BIDPRICE" />
+        <result property="priceTimeStamp" column="PRICETIMESTAMP" />
+        <association property="instrument" resultMap="InstrumentResultMap" />
+    </resultMap>
+
+    <select id="getAllStocks" resultMap="StockResultMap">
+        SELECT s.STOCKID, s.ASKPRICE, s.BIDPRICE, s.PRICETIMESTAMP,
+        i.INSTRUMENTID, i.EXTERNALIDTYPE, i.EXTERNALID, i.CATEGORYID, i.INSTRUMENTDESCRIPTION, i.MAXQUANTITY, i.MINQUANTITY
+        FROM stock s
+        LEFT JOIN instrument i ON s.INSTRUMENTID = i.INSTRUMENTID
+    </select>
+
+    <select id="getStockById" resultMap="StockResultMap">
+        SELECT s.STOCKID, s.ASKPRICE, s.BIDPRICE, s.PRICETIMESTAMP,
+        i.INSTRUMENTID, i.EXTERNALIDTYPE, i.EXTERNALID, i.CATEGORYID, i.INSTRUMENTDESCRIPTION, i.MAXQUANTITY, i.MINQUANTITY
+        FROM stock s
+        LEFT JOIN instrument i ON s.INSTRUMENTID = i.INSTRUMENTID
+        WHERE s.STOCKID = #{stockId}
+    </select>
+
+    <insert id="insertStock" parameterType="Stock">
+        INSERT INTO stock (
+        STOCKID, ASKPRICE, BIDPRICE, PRICETIMESTAMP,INSTRUMENTID
+        )
+        VALUES (
+        #{stockId}, #{askPrice}, #{bidPrice},#{priceTimeStamp}, #{instrument.instrumentId}
+        )
+    </insert>
+
+    <delete id="deleteStock" parameterType="Long">
+        DELETE FROM stock
+        WHERE
+        STOCKID = #{stockId}
+    </delete>
+
+</mapper>

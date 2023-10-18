@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fidelity.integration.mapper.TransactionResultMap">
+    <resultMap type="Instrument" id="InstrumentResultMap">
+        <id property="instrumentId" column="INSTRUMENTID" />
+        <result property="externalIdType" column="EXTERNALIDTYPE" />
+        <result property="externalId" column="EXTERNALID" />
+        <result property="categoryId" column="CATEGORYID" />
+        <result property="instrumentDescription" column="INSTRUMENTDESCRIPTION" />
+        <result property="maxQuantity" column="MAXQUANTITY" />
+        <result property="minQuantity" column="MINQUANTITY" />
+    </resultMap>
+
+    <resultMap type="Transaction" id="TransactionResultMap">
+        <id property="transactionId" column="TRANSACTIONID" />
+        <result property="isBuy" column="ISBUY" />
+        <result property="buySellPrice" column="BUYSELLPRICE" />
+        <result property="quantity" column="QUANTITY" />
+        <result property="transactionDate" column="TRANSACTIONDATE" />
+        <result property="userId" column="USERID" />
+        <association property="instrument" resultMap="InstrumentResultMap" />
+    </resultMap>
+
+    <select id="getTransactionsByUserId" resultMap="TransactionResultMap">
+        SELECT t.TRANSACTIONID, t.ISBUY, t.BUYSELLPRICE, t.QUANTITY, t.TRANSACTIONDATE, t.USERID,
+        i.INSTRUMENTID, i.EXTERNALIDTYPE, i.EXTERNALID, i.CATEGORYID, i.INSTRUMENTDESCRIPTION, i.MAXQUANTITY, i.MINQUANTITY
+        FROM transaction t
+        LEFT JOIN instrument i ON t.INSTRUMENTID = i.INSTRUMENTID
+        WHERE t.USERID = #{userId}
+    </select>
+
+    <select id="getAllTransactions" resultMap="TransactionResultMap">
+        SELECT t.TRANSACTIONID, t.ISBUY, t.BUYSELLPRICE, t.QUANTITY, t.TRANSACTIONDATE, t.USERID,
+        i.INSTRUMENTID, i.EXTERNALIDTYPE, i.EXTERNALID, i.CATEGORYID, i.INSTRUMENTDESCRIPTION, i.MAXQUANTITY, i.MINQUANTITY
+        FROM transaction t
+        LEFT JOIN instrument i ON t.INSTRUMENTID = i.INSTRUMENTID
+    </select>
+
+    <select id="getTransactionById" resultMap="TransactionResultMap">
+        SELECT t.TRANSACTIONID, t.ISBUY, t.BUYSELLPRICE, t.QUANTITY, t.TRANSACTIONDATE, t.USERID,
+        i.INSTRUMENTID, i.EXTERNALIDTYPE, i.EXTERNALID, i.CATEGORYID, i.INSTRUMENTDESCRIPTION, i.MAXQUANTITY, i.MINQUANTITY
+        FROM transaction t
+        LEFT JOIN instrument i ON t.INSTRUMENTID = i.INSTRUMENTID
+        WHERE t.TRANSACTIONID = #{transactionId}
+    </select>
+
+    <insert id="insertTransaction" parameterType="Transaction" useGeneratedKeys="true" keyProperty="transactionId" keyColumn="TRANSACTIONID">
+        INSERT INTO transaction (
+         ISBUY, BUYSELLPRICE, QUANTITY, TRANSACTIONDATE, USERID, INSTRUMENTID
+        )
+        VALUES (
+       #{isBuy}, #{buySellPrice}, #{quantity}, #{transactionDate}, #{userId}, #{instrument.instrumentId}
+        )
+    </insert>
+
+    <delete id="deleteTransaction" parameterType="Long">
+        DELETE FROM transaction
+        WHERE
+        TRANSACTIONID = #{transactionId}
+    </delete>
+
+</mapper>

@@ -1,0 +1,58 @@
+<nav
+  class="flex items-center justify-between px-3 py-3 border rounded-sm shadow-sm bg-gradient text-white"
+>
+  <a href="/" class="text-2xl font-extrabold italic whitespace-nowrap">
+    TradeHub
+  </a>
+  <ul class="flex gap-5 justify-end w-full">
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/login">Login</a></li>
+    <li><a routerLink="/register">Register</a></li>
+  </ul>
+</nav>
+<section class="flex items-center justify-evenly mx-auto w-3/5 mt-[50px]">
+  <form
+    class="flex flex-1 flex-col gap-4"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input class="input" type="email" id="email" formControlName="email" />
+    </div>
+    <div
+      *ngIf="
+        loginForm.get('email')?.hasError('required') &&
+        loginForm.get('email')?.dirty
+      "
+    >
+      Email is required.
+    </div>
+    <div
+      *ngIf="
+        loginForm.get('email')?.hasError('email') &&
+        loginForm.get('email')?.dirty
+      "
+    >
+      Please enter a valid email address.
+    </div>
+
+    <div class="flex items-center gap-3">
+      <button
+        class="btn-primary w-fit"
+        type="submit"
+        [disabled]="loginForm.invalid"
+      >
+        Login
+      </button>
+      <a class="link" href="/register">New user?</a>
+    </div>
+  </form>
+  <img
+    class="flex-1"
+    src="/assets/images/login-image.png"
+    height="500px"
+    width="500px"
+    alt="trading lapton image"
+  />
+</section>
